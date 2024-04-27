@@ -4,6 +4,7 @@ from entity.User import User
 
 
 class UserRepository:
+
     conn = sqlite3.connect('user.db')
     cur = conn.cursor()
 
@@ -29,4 +30,3 @@ class UserRepository:
     def read_all(cls):
         cls.cur.execute("SELECT * FROM user")
         return cls.cur.fetchall()
-
