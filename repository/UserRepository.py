@@ -19,4 +19,3 @@ print(cur.fetchall())
 
 conn.commit()
 conn.close()
-
