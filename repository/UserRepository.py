@@ -1,21 +1,32 @@
 import sqlite3
 
-conn = sqlite3.connect('../user.db')
-cur = conn.cursor()
+from entity.User import User
 
-# cur.execute("""
-#                 CREATE TABLE user (
-#                 user_id integer PRIMARY KEY,
-#                 first_name text,
-#                 last_name text,
-#                 email_address text,
-#                 cellphone text
-#             )""")
 
-# cur.execute(" INSERT INTO user VALUES (null, 'Stephan', 'Salvatore', 'salvatores@gamil.com', '0653815478')")
+class UserRepository:
+    conn = sqlite3.connect('user.db')
+    cur = conn.cursor()
 
-cur.execute("SELECT * FROM user")
-print(cur.fetchall())
+    @classmethod
+    def create(cls, user: User):
+        with cls.conn:
+            cls.cur.execute(" INSERT INTO user VALUES (null, :first_name, :last_last, :email_address, :cellphone)",
+                            {'first_name': user.first_name, 'last_last': user.last_name,
+                             'email_address': user.email_address,
+                             'cellphone': user.cellphone})
 
-conn.commit()
-conn.close()
+    @classmethod
+    def read(cls, user_id):
+        cls.cur.execute("SELECT * FROM user WHERE user_id = :user_id", {'user_id': user_id})
+        return cls.cur.fetchone()
+
+    @classmethod
+    def delete(cls, user_id):
+        with cls.conn:
+            cls.cur.execute("DELETE FROM user WHERE user_id = :user_id", {'user_id': user_id})
+
+    @classmethod
+    def read_all(cls):
+        cls.cur.execute("SELECT * FROM user")
+        return cls.cur.fetchall()
+
