@@ -5,7 +5,7 @@ from entity.User import User
 
 class UserRepository:
 
-    conn = sqlite3.connect('user.db')
+    conn = sqlite3.connect('bitprop.db')
     cur = conn.cursor()
 
     @classmethod

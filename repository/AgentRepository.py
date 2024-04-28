@@ -4,7 +4,7 @@ from entity.Agent import Agent
 
 
 class AgentRepository:
-    conn = sqlite3.connect('agent.db')
+    conn = sqlite3.connect('bitprop.db')
     cur = conn.cursor()
 
     @classmethod
