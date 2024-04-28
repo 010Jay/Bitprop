@@ -5,6 +5,7 @@ from entity.Property import Property
 
 class PropertyRepository:
     conn = sqlite3.connect('bitprop.db')
+    conn.execute("PRAGMA foreign_keys = 1")
     cur = conn.cursor()
 
     @classmethod

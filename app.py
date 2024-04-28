@@ -1,6 +1,7 @@
 #!flask/bin/python
 from flask import Flask
 
+from controller.OrderController import order_api
 from controller.PropertyController import property_api
 from controller.UserController import user_api
 from controller.AgentController import agent_api
@@ -17,6 +18,7 @@ def index():
 app.register_blueprint(user_api)
 app.register_blueprint(agent_api)
 app.register_blueprint(property_api)
+app.register_blueprint(order_api)
 
 if __name__ == '__main__':
     app.run(threaded=False)
