@@ -17,15 +17,22 @@ def get_users():
     return jsonify({'users': user_list})
 
 
+@user_api.route('/user/read/<user_id>', methods=['GET'])
+def get_user(user_id):
+    user = db.read(user_id)
+    return jsonify({'user': user})
+
+
 @user_api.route('/user/create', methods=['POST'])
 def create_user():
     data = json.dumps(request.json)
     user = json.loads(data, object_hook=lambda d: SimpleNamespace(**d))
     db.create(user)
-    return data
+    return jsonify({'user': request.json})
 
 
 @user_api.route('/user/delete/<user_id>', methods=['DELETE'])
 def delete_user(user_id):
     db.delete(user_id)
-    return "User has been deleted."
+    message = "User has been deleted."
+    return jsonify({'Message': message})

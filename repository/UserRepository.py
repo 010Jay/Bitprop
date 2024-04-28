@@ -11,8 +11,8 @@ class UserRepository:
     @classmethod
     def create(cls, user: User):
         with cls.conn:
-            cls.cur.execute(" INSERT INTO user VALUES (null, :first_name, :last_last, :email_address, :cellphone)",
-                            {'first_name': user.first_name, 'last_last': user.last_name,
+            cls.cur.execute(" INSERT INTO user VALUES (null, :first_name, :last_name, :email_address, :cellphone)",
+                            {'first_name': user.first_name, 'last_name': user.last_name,
                              'email_address': user.email_address,
                              'cellphone': user.cellphone})
 
